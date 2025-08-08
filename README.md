@@ -22,15 +22,17 @@ These features empower any community member to become a seller and launch their 
 - Dropshipping companies
 
 ### Features
-Privacy-enabled smart-contracts with Midnight network 🔥.
-Cardano and Midnight assets can be used as payment for products🔥.
-DAO model. Open-source alternative to Amazon, Shopify.
-The discount liquidity pool to reduce the price of products.
-Free shipping is always included.
-USD Guarantee as purchase protection.
-Each trade is managed by an isolated DUST smart-contract (Important for horizontal scalability).
-Community repository of products, suppliers, marketing, landing pages templates.
-Integration of AI models, MCP servers, Vectorized search.
+- Privacy-enabled smart-contracts with Midnight network 🔥
+- Cardano and Midnight assets can be used as payment for products 🔥
+- DAO model
+- Open-source alternative to Amazon, Shopify
+- The discount liquidity pool to reduce the price of products
+- Free shipping is always included
+- USD Guarantee as purchase protection
+- Each trade is managed by an isolated DUST smart-contract (Important for horizontal scalability)
+- Community repository of products, suppliers, marketing, landing pages templates
+- Integration of AI models, MCP servers, Vectorized search
+
 
 | Feature      | yes | Description                                          |
 | -------------- | ----- | ------------------------------------------------------ |
