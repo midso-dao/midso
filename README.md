@@ -15,23 +15,6 @@ These features empower any community member to become a seller and launch their 
 
 [Docs Website](https://docs.midso.io)
 
-## Differential factors
-
-- Community-governed with chain vote – DAO constitutional model.
-- The **discount liquidity pool** to reduce the price of products.
-- Use of Cardano Network – Midnight Network 🔥.
-- Free shipping is always included.
-- ADA Guarantee as purchase protection.
-- Each trade is managed by an isolated smart-contract (Important for high horizontal scalability).
-- Any member of the community can be a seller (DAO member).
-- Community repository of products, suppliers, marketing, landing pages templates.
-- Seller incentive program.
-- Integration of AI models, MCP servers.
-- Product search by AI vectorized semantics.
-- Use of collective intelligence that enables strategic cooperation and mutual benefit for ecosystem members 
-(market investigation, supplier analysis, development, innovation, etc).
-- Open-source development (Apache 2.0).
-
 #### Open source alternative to
 
 - Amazon
@@ -39,14 +22,24 @@ These features empower any community member to become a seller and launch their 
 - Dropshipping companies
 
 ### Features
+- Privacy-enabled smart-contracts with Midnight network 🔥
+- Cardano and Midnight assets can be used as payment for products 🔥
+- DAO model
+- Open-source alternative to Amazon, Shopify
+- The discount liquidity pool to reduce the price of products
+- Free shipping is always included
+- USD Guarantee as purchase protection
+- Each trade is managed by an isolated DUST smart-contract (Important for horizontal scalability)
+- Community repository of products, suppliers, marketing, landing pages templates
+- Integration of AI models, MCP servers, Vectorized search
 
 
 | Feature      | yes | Description                                          |
 | -------------- | ----- | ------------------------------------------------------ |
-| P2P          | ✓  | Cardano  mainnet-preprod        |
+| P2P          | ✓  | Midnight  mainnet        |
 | E2E          | ✓  | Signing and sending transactions only in the browser |
-| Multi-wallet | ✓  | Lace, Eternl                            |
-| Plutus V3       | ✓  | Aiken validators                           |
+| Multi-wallet | ✓  | Lace                          |
+| DUST       | ✓  | Dust validators                           |
 
 ### Stack
 
@@ -64,9 +57,6 @@ These features empower any community member to become a seller and launch their 
 - [X] Backend
 - [X] Multi-Wallet Support
   - [X] Lace
-  - [X] Eternl
-- [X] Add Blockchain Integration (In Progress)
-- [ ] Add Liquidity Pool
 - [ ] Add midnight implementation
 
 ## Table Of Content
@@ -130,7 +120,7 @@ Copyright © 2025
 
 - **GitHub:** [rey-sudo](https://github.com/rey-sudo)
 - **Email:** [midso.dao@gmail.com](mailto:midso.dao@gmail.com)  
-- **Discord:** [Join our server](https://discord.gg/qEdn9m3VUJ)  
+- **Discord:** [Join our server](https://discord.com/invite/MJ5Ckac6TV)  
 - **X (Twitter):** [@midsodao](https://x.com/midsodao)  
 - **LinkedIn:** [Rey Sudo](https://www.linkedin.com/in/rey-sudo)
 
@@ -139,10 +129,10 @@ Copyright © 2025
 ### Get Involved
 
 - [Become a Seller](https://seller.midso.io)  
-- [Become a Mediator](https://discord.gg/qEdn9m3VUJ)  
-- [Become an Administrative](https://discord.gg/qEdn9m3VUJ)  
-- [Become a Developer](https://discord.gg/qEdn9m3VUJ)  
-- [Become a Mod](https://discord.gg/qEdn9m3VUJ)
+- [Become a Mediator](https://discord.com/invite/MJ5Ckac6TV)  
+- [Become an Administrative](https://discord.com/invite/MJ5Ckac6TV)  
+- [Become a Developer](https://discord.com/invite/MJ5Ckac6TV)  
+- [Become a Mod](https://discord.com/invite/MJ5Ckac6TV)
 
 ---
 
@@ -152,11 +142,4 @@ We're looking for dedicated contributors to join us for Catalyst Fund 14.
 
 Be part of shaping the future of Cardano.
 
----
-
-### Video
-
-[![Video](https://img.youtube.com/vi/f1lCRxHEJlY/0.jpg)](https://www.youtube.com/watch?v=f1lCRxHEJlY)
-
-[👉 Prototype RC v1.0.1 mainnet video](https://www.youtube.com/watch?v=f1lCRxHEJlY)
 
