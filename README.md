@@ -11,9 +11,7 @@ In addition, the implementation of other innovative and deterministic trading lo
 Midso also leverages the collective intelligence of its DAO members to conduct market and product research that benefits the Cardano community.
 These features empower any community member to become a seller and launch their own store.
 
-[Midso's Website](https://midso.io)
-
-[Docs Website](https://docs.midso.io)
+[Midso's Website](https://opencardano.com)
 
 #### Open source alternative to
 
