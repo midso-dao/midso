@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-product-publisher
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: service-product-publisher
+  template:
+    metadata:
+      labels:
+        role: service-product-publisher
+    spec:
+      containers:
+        - name: service-product-publisher
+          image: midso/base-publisher
+          env:
+            - name: DATABASE_NAME
+              value: service_product                 
+            - name: DATABASE_USER
+              value: marketplace                                                                                                                                                                         
+            - name: STREAM_NAME
+              value: service-product
+            - name: STREAM_SUBJECT
+              value: service-product.*              
+            - name: QUERY_INTERVAL
+              value: "10000"    
+            - name: QUERY_LIMIT
+              value: "100"    
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name                                                             
+            - name: DATABASE_HOST  
+              valueFrom:
+                configMapKeyRef:
+                  name: database-config
+                  key: master     
+            - name: DATABASE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: database-config
+                  key: port                            
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: database-password-secret
+                  key: password
+            - name: NATS_SERVERS
+              valueFrom:
+                configMapKeyRef:
+                  name: nats-cluster-config
+                  key: hosts 
+
+                  
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"   

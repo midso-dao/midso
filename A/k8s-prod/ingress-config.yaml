@@ -1,0 +1,46 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-service
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "https://*.midso.io, https://midso.io"
+    nginx.ingress.kubernetes.io/cors-expose-headers: "Set-Cookie"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+    nginx.ingress.kubernetes.io/websocket-services: "service-chat"
+    nginx.ingress.kubernetes.io/proxy-body-size: "100m"
+
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - midso.io
+        - '*.midso.io'
+      secretName: cloudflare-origin-secret
+  rules:
+    - host: midso.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend-main
+                port:
+                  number: 80
+    - host: seller.midso.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend-seller
+                port:
+                  number: 81                

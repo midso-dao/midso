@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-location
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: service-location
+  template:
+    metadata:
+      labels:
+        role: service-location
+    spec:
+      containers:
+        - name: service-location
+          image: midso/service-location
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name   
+            - name: ENV_MODE
+              value: 'dev'                                                               
+            - name: POD_TIMEOUT
+              value: '120000'   
+            - name: EXPRESS_PORT
+              value: "8000"
+            - name: EXPRESS_TIMEOUT
+              value: "30000"                                                                                                                                                 
+            - name: CORS_DOMAINS
+              value: "http://localhost:5173,http://localhost:5174,https://midso.dev,http://midso.dev,http://localhost:8080,http://localhost:8081,https://midso.dev,https://dashboard.midso.dev"                           
+            - name: DEV_IP
+              value: "50.73.157.178" 
+            - name: GEO_TOKEN
+              value: "f76c9e2af54296"                 
+          resources:
+            limits:
+              memory: "500Mi"
+            requests:
+              memory: "256Mi"       
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-location
+spec:
+  selector:
+    role: service-location
+  ports:
+    - name: service-location
+      protocol: TCP
+      port: 8000
+      targetPort: 8000

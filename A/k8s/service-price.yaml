@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-price
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: service-price 
+  template:
+    metadata:
+      labels:
+        role: service-price 
+    spec:
+      containers:
+        - name: service-price 
+          image: midso/service-price 
+          env:
+            - name: NODE_ENV
+              value: "development"
+            - name: REDIS_PRICE_HOST
+              value: redis://redis-price:6379
+              
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "10Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"  
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-price
+spec:
+  selector:
+    role: service-price
+  ports:
+    - name: service-price
+      protocol: TCP
+      port: 8007
+      targetPort: 8007

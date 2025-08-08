@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-processor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-processor
+  template:
+    metadata:
+      labels:
+        app: service-processor
+    spec:
+      containers:
+        - name: service-processor
+          image: midso/service-processor
+          env:
+            - name: NODE_ENV
+              value: "development"
+            - name: DATABASE_NAME
+              value: service_processor        
+            - name: DATABASE_USER
+              value: marketplace              
+            - name: REDIS_PROCESSOR_HOST
+              value: redis-processor.default.svc.cluster.local
+            - name: MINIO_BUCKET
+              value: media
+            - name : MINIO_USE_SSL
+              value: "false"              
+            - name : MINIO_PORT
+              value: "9000"
+
+            - name: MINIO_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: minio-host-secret
+                  key: host
+
+            - name: MINIO_ROOT_USER
+              valueFrom:
+                secretKeyRef:
+                  name: minio-user-secret
+                  key: user
+
+            - name: MINIO_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: minio-password-secret
+                  key: password 
+
+            - name: DATABASE_HOST  
+              valueFrom:
+                configMapKeyRef:
+                  name: database-config
+                  key: master  
+                  
+            - name: DATABASE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: database-config
+                  key: port
+
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: database-password-secret
+                  key: password               
+
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"

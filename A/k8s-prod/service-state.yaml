@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-state
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: service-state
+  template:
+    metadata:
+      labels:
+        role: service-state
+    spec:
+      containers:
+        - name: service-state
+          image: midso/service-state
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: NETWORK_ENV
+              value: Mainnet
+            - name: DATABASE_NAME
+              value: service_gateway       
+            - name: DATABASE_USER
+              value: marketplace 
+            - name: REDIS_STATE_HOST
+              value: redis://redis-state:6379
+            - name: REDIS_BOOKS_HOST
+              value: redis://redis-books:6379              
+            - name: QUERY_LIMIT
+              value: "500"        
+            - name: QUERY_INTERVAL
+              value: "60000"       
+            - name: SCAN_RANGE
+              value: "300000"    
+            - name: BLOCKFROST_HOST
+              value: https://cardano-mainnet.blockfrost.io/api/v0       
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: DATABASE_HOST  
+              valueFrom:
+                configMapKeyRef:
+                  name: database-config
+                  key: master  
+            - name: DATABASE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: database-config
+                  key: port                                     
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: database-password-secret
+                  key: password                       
+            - name: BLOCKFROST_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: blockfrost-key
+                  key: key        
+            - name: KUPO_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: kupo-key
+                  key: key 
+            - name: OGMIOS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: ogmios-key
+                  key: key    
+
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "100Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi" 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-state
+spec:
+  selector:
+    role: service-state
+  ports:
+    - name: service-state
+      protocol: TCP
+      port: 8008
+      targetPort: 8008

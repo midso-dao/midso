@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-email-consumer
+spec:
+  selector:
+    matchLabels:
+      role: service-email-consumer
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        role: service-email-consumer
+    spec:
+      terminationGracePeriodSeconds: 15
+      containers:
+        - name: service-email-consumer
+          image: midso/base-consumer
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: "development"                  
+            - name: SERVICE_NAME
+              value: service-email
+            - name: CONSUMER_GROUP
+              value: service-email-group
+            - name: DURABLE_NAME
+              value: service-email-consumer
+            - name: STREAM_LIST
+              value: service-seller
+            - name: FILTER_SUBJECTS
+              value: "service-seller.CreateEmail"
+            - name: DATABASE_NAME
+              value: service_email
+            - name: DATABASE_USER
+              value: marketplace
+            - name: HANDLER_SELLER_URL
+              value: https://seller.midso.dev
+
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: RESEND_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: resend-key-secret
+                  key: key
+            - name: DATABASE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: database-config
+                  key: master
+            - name: DATABASE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: database-config
+                  key: port
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: database-password-secret
+                  key: password
+            - name: NATS_SERVERS
+              valueFrom:
+                configMapKeyRef:
+                  name: nats-cluster-config
+                  key: hosts 
+
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"        

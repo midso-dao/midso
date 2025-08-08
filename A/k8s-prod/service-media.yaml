@@ -1,0 +1,101 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-media
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: service-media
+  template:
+    metadata:
+      labels:
+        role: service-media
+    spec:
+      containers:
+        - name: service-media
+          image: midso/service-media
+          env:                                  
+            - name: NODE_ENV
+              value: "production"
+            - name: DATABASE_NAME
+              value: service_media 
+            - name: DATABASE_USER
+              value: marketplace 
+            - name : REDIS_RATELIMIT_URL
+              value: "redis://redis-limiter:6379"   
+            - name: MINIO_BUCKET
+              value: midso-media-prod
+            - name : MINIO_USE_SSL
+              value: "true"
+            - name : MINIO_PORT
+              value: "443" 
+
+            - name: MINIO_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: minio-host-secret
+                  key: host
+
+            - name: MINIO_ROOT_USER
+              valueFrom:
+                secretKeyRef:
+                  name: minio-user-secret
+                  key: user
+
+            - name: MINIO_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: minio-password-secret
+                  key: password 
+
+            - name: AGENT_JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: agent-key-secret
+                  key: key                   
+                                                        
+            - name: DATABASE_HOST  
+              valueFrom:
+                configMapKeyRef:
+                  name: database-config
+                  key: master   
+
+            - name: DATABASE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: database-config
+                  key: port  
+
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: database-password-secret
+                  key: password   
+
+            - name: INTERNAL_ENDPOINT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: internal-endpoint-secret
+                  key: key
+
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "100Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"          
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-media
+spec:
+  selector:
+    role: service-media
+  ports:
+    - name: service-media
+      protocol: TCP
+      port: 8003
+      targetPort: 8003

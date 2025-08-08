@@ -1,0 +1,32 @@
+{
+  "name": "service-query",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon --watch src --exec tsx src/index.ts",
+    "build": "tsc --project tsconfig.json",
+    "start": "node dist/index.js",
+    "database": "tsx setup.ts"
+  },
+  "engines": {
+    "node": ">=20.10.0"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.11.2",
+    "@midso/common": "^1.0.274",
+    "axios": "^1.9.0",
+    "express": "^4.21.1",
+    "graphql": "^16.9.0",
+    "mysql2": "^3.11.4",
+    "redis": "^4.7.0",
+    "weaviate-ts-client": "^2.2.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "nodemon": "^3.0.3",
+    "tsx": "^4.7.0",
+    "typescript": "^5.6.3"
+  }
+}

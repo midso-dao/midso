@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-processor
+  namespace: default
+  labels:
+    app: redis-processor
+spec:
+  type: ClusterIP
+  ports:
+    - port: 6379
+      targetPort: 6379
+  selector:
+    app: redis-processor
+
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis-processor
+  namespace: default
+spec:
+  serviceName: "redis-processor"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-processor
+  template:
+    metadata:
+      labels:
+        app: redis-processor
+    spec:
+      containers:
+        - name: redis
+          image: redis
+          ports:
+            - containerPort: 6379
+          volumeMounts:
+            - name: redis-processor-data
+              mountPath: /data
+          command: [ "redis-server", "--appendonly", "yes" ]
+  volumeClaimTemplates:
+    - metadata:
+        name: redis-processor-data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 500Mi

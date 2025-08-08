@@ -1,0 +1,278 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+
+build:
+  local:
+    useDockerCLI: true
+    push: false
+    concurrency: 0
+  tagPolicy:
+    sha256: {}
+  artifacts:       
+    - image: midso/frontend-main
+      context: frontend-main
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'pages/**/*'
+            dest: pages
+          - src: 'components/**/*'
+            dest: components
+          - src: 'app.vue'
+            dest: .
+          - src: 'nuxt.config.*'
+            dest: .
+
+    - image: midso/frontend-seller
+      context: frontend-seller
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'pages/**/*'
+            dest: pages
+          - src: 'components/**/*'
+            dest: components
+          - src: 'app.vue'
+            dest: .
+          - src: 'nuxt.config.*'
+            dest: .
+
+    - image: midso/service-seller
+      context: service-seller
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.{ts,js,json,vue}'
+            dest: .
+
+    - image: midso/base-publisher
+      context: base-publisher
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.{ts,js,json,vue}'
+            dest: .
+
+    - image: midso/base-consumer
+      context: base-consumer
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.{ts,js,json,vue}'
+            dest: .         
+
+    - image: midso/service-email
+      context: service-email
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.{ts,js,json,vue}'
+            dest: .   
+
+    - image: midso/service-product
+      context: service-product
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.{ts,js,json,vue}'
+            dest: .                
+
+#    - image: midso/service-llm
+#      context: service-llm
+#      docker:
+#        dockerfile: Dockerfile
+#      sync:
+#        manual:
+#          - src: '**/*.py'
+#            dest: .
+#          - src: 'requirements.txt'
+#            dest: .
+
+    - image: midso/service-query
+      context: service-query
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.{ts,js,json,vue}'
+            dest: .  
+
+    - image: midso/service-media
+      context: service-media
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.{ts,js,json,vue}'
+            dest: .     
+    - image: midso/service-processor
+      context: service-processor
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+          - src: 'package.json'
+            dest: .         
+
+    - image: midso/service-user
+      context: service-user
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.{ts,js,json,vue}'
+            dest: .
+    - image: midso/service-gateway
+      context: service-gateway
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.{ts,js,json,vue}'
+            dest: .
+    - image: midso/service-price
+      context: service-price
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.{ts,js,json,vue}'
+            dest: .
+    - image: midso/service-state
+      context: service-state
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.{ts,js,json,vue}'
+            dest: .            
+    - image: midso/service-notification
+      context: service-notification
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.{ts,js,json,vue}'
+            dest: .  
+    - image: midso/service-chat
+      context: service-chat
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.{ts,js,json,vue}'
+            dest: . 
+
+deploy:
+  statusCheckDeadlineSeconds: 600
+  kubectl:
+    manifests:
+      - ./A/k8s/*
+      - ./A/k8s-dev/*
+
+portForward:
+  - resourceType: service
+    resourceName: frontend-main
+    namespace: default
+    port: 80
+    localPort: 8081
+
+  - resourceType: service
+    resourceName: frontend-seller
+    namespace: default
+    port: 81
+    localPort: 8082
+
+  - resourceType: service
+    resourceName: service-seller
+    namespace: default
+    port: 8000
+    localPort: 8000
+
+  - resourceType: service
+    resourceName: service-product
+    namespace: default
+    port: 8001
+    localPort: 8001    
+
+#  - resourceType: service
+#    resourceName: service-llm
+#    namespace: default
+#    port: 8002
+#    localPort: 8002
+
+  - resourceType: service
+    resourceName: service-media
+    namespace: default
+    port: 8003
+    localPort: 8003 
+
+  - resourceType: service
+    resourceName: service-query
+    namespace: default
+    port: 8004
+    localPort: 8004    
+
+  - resourceType: service
+    resourceName: service-user
+    namespace: default
+    port: 8005
+    localPort: 8005  
+
+  - resourceType: service
+    resourceName: service-gateway
+    namespace: default
+    port: 8006
+    localPort: 8006  
+
+  - resourceType: service
+    resourceName: service-price
+    namespace: default
+    port: 8007
+    localPort: 8007  
+
+  - resourceType: service
+    resourceName: service-state
+    namespace: default
+    port: 8008
+    localPort: 8008 
+
+  - resourceType: service
+    resourceName: service-notification
+    namespace: default
+    port: 8009
+    localPort: 8009
+
+  - resourceType: service
+    resourceName: service-chat
+    namespace: default
+    port: 8010
+    localPort: 8010
+
+  - resourceType: service
+    resourceName: redis-chat
+    namespace: default
+    port: 6379
+    localPort: 6380
+
+  - resourceType: service
+    resourceName: weaviate
+    namespace: default
+    port: 8080
+    localPort: 8080    
+
+  - resourceType: service
+    resourceName: ollama
+    namespace: default 
+    port: 11434
+    localPort: 11434
+    

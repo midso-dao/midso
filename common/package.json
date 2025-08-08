@@ -1,0 +1,63 @@
+{
+  "name": "@midso/common",
+  "version": "1.0.274",
+  "description": "Common shared package",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "sql"
+  ],
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "tsc",
+    "pub": "npm run clean && npm run build && npm version patch && npm publish --access=public"
+  },
+  "keywords": [
+    "sql",
+    "typescript",
+    "shared",
+    "microservices",
+    "utilities"
+  ],
+  "author": "rey-sudo",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/midso/core.git"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.1",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/node": "^22.14.0",
+    "@types/node-forge": "^1.3.13",
+    "@types/pako": "^2.0.3",
+    "@types/pino": "^7.0.4",
+    "@types/proxy-addr": "^2.0.3",
+    "@types/sanitize-html": "^2.15.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.12.0",
+    "@cardano-foundation/cardano-verify-datasignature": "^1.0.11",
+    "@types/request-ip": "^0.0.41",
+    "express": "^5.1.0",
+    "graphql": "^16.10.0",
+    "ioredis": "^5.6.1",
+    "jsonwebtoken": "^9.0.2",
+    "minio": "^8.0.5",
+    "ms": "^2.1.3",
+    "mysql2": "^3.14.0",
+    "nanoid": "^5.1.5",
+    "node-forge": "^1.3.1",
+    "pako": "^2.1.0",
+    "pino": "^9.6.0",
+    "proxy-addr": "^2.0.7",
+    "redis": "^5.5.6",
+    "request-ip": "^3.3.0",
+    "sanitize-html": "^2.16.0",
+    "unique-names-generator": "^4.7.1",
+    "uuid": "^11.1.0",
+    "zod": "^3.24.2"
+  }
+}
