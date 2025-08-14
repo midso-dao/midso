@@ -1,143 +1,144 @@
-# Introduction
+# Midso — Decentralized E-Commerce on Midnight Network
 
-Midso is a decentralized e-commerce based 100% on Midnight, which protects the privacy of the buyer and seller. Products can be bought and sold using Midnight and Cardano native assets.
+## Introduction
 
-Midso solves a key challenge in decentralized e-commerce by protecting users' private data using Midnight smart contracts. Offering a solution to the problem of mass adoption of the Cardano ecosystem.
+**Midso** is a fully decentralized e-commerce platform built **100% on the Midnight network**, designed to protect the privacy of both buyers and sellers.  
+It enables the purchase and sale of products using **Midnight** and **Cardano native assets** (Bridge).
 
-On Midso, products can be purchased using a Cardano or Midnight wallet. The trading process between the seller and the buyer is handled by Plutus V3 contracts.
-Using a Cardano smart-contract allows to use **_ADA_**, **_stablecoin_** and **_native asset_** as a form of payment for the products.
-In addition, the implementation of other innovative and deterministic trading logics. It is also compatible with the **_midnight network._**
+Midso addresses one of the main challenges in decentralized e-commerce: safeguarding user data. By using **DUST smart contracts** on Midnight, it offers a secure and private trading environment while also contributing to the **mass adoption of the Cardano ecosystem**.
 
-Midso also leverages the collective intelligence of its DAO members to conduct market and product research that benefits the Cardano community.
-These features empower any community member to become a seller and launch their own store.
+On Midso, buyers can pay with either a **Cardano** or **Midnight** wallet. Transactions between buyers and sellers are handled entirely by **DUST contracts**, enabling payments in:
 
-[Midso's Website](https://opencardano.com)
+- **ADA**
+- **Stablecoins**
+- **Native assets**
 
-#### Open source alternative to
+Midso also supports innovative and deterministic trading logic, and is fully compatible with the **Midnight network**.
 
-- Amazon
-- Shopify
-- Dropshipping companies
+In addition, the platform integrates a **DAO model**, enabling community members to conduct market research, collaborate on product development, and launch their own stores.
 
-### Features
-- Privacy-enabled smart-contracts with Midnight network 🔥
-- Cardano and Midnight assets can be used as payment for products 🔥
-- DAO model
-- Open-source alternative to Amazon, Shopify
-- The discount liquidity pool to reduce the price of products
-- Free shipping is always included
-- USD Guarantee as purchase protection
-- Each trade is managed by an isolated DUST smart-contract (Important for horizontal scalability)
-- Community repository of products, suppliers, marketing, landing pages templates
-- Integration of AI models, MCP servers, Vectorized search
+🔗 [Visit Midso’s Website](https://opencardano.com)
 
+---
 
-| Feature      | yes | Description                                          |
-| -------------- | ----- | ------------------------------------------------------ |
-| P2P          | ✓  | Midnight  mainnet        |
-| E2E          | ✓  | Signing and sending transactions only in the browser |
-| Multi-wallet | ✓  | Lace                          |
-| DUST       | ✓  | Dust validators                           |
+## Why Midso?
 
-### Stack
+Open-source alternative to:
 
+- Amazon  
+- Shopify  
+- Traditional dropshipping companies  
 
-| Stack    | Type      | Description                  | Keywords                     | Version | Licence            | Repository                                                         |
-| ---------- | ----------- | ------------------------------ | ------------------------------ | --------- | -------------------- | -------------------------------------------------------------------- |
-| mysql    | database  | cloud-native database        | sharding                     | 8.0     | GPL license        | [https://www.mysql.com/downloads](https://www.mysql.com/downloads) |
-| Node.js  | runtime   | javascript runtime           | code, javascript             | alpine  | MIT                | [https://github.com/nodejs/node](https://github.com/nodejs/node)   |
-| GraphQL  | API       | A GraphQL server can fetch data from separate sources for a single client query | query, polling, websocket | 4.11.2 | MIT | [https://github.com/apollographql/apollo-server](https://github.com/apollographql/apollo-server)
+---
 
-## Road Map
+## Key Features
 
-- [X] Add User UI
-- [X] Add Seller UI
-- [X] Backend
-- [X] Multi-Wallet Support
-  - [X] Lace
-- [ ] Add midnight implementation
+- 🔒 **Privacy-enabled DUST contracts** (Midnight network)  
+- 💱 Payments with Cardano and Midnight assets  
+- 🗳 DAO governance model  
+- 🏷 Discount liquidity pool to reduce product prices  
+- 📦 Always includes free shipping  
+- 💵 USD guarantee as purchase protection  
+- 🧩 Each trade managed by an **isolated DUST contract** (horizontal scalability)  
+- 📚 Community repository: products, suppliers, marketing templates  
+- 🤖 AI integration: MCP servers, vectorized search  
 
-## Table Of Content
+| Feature      | Available | Description                                          |
+|--------------|-----------|------------------------------------------------------|
+| **P2P**      | ✓         | Midnight mainnet support                             |
+| **E2E**      | ✓         | Transactions signed and sent directly in browser     |
+| **Multi-wallet** | ✓     | Lace and other wallet integrations                   |
+| **DUST**     | ✓         | Smart contract validators for secure, scalable trades |
 
-[Installation](#installation)
+---
 
-[Documentation](#documentation)
+## Technology Stack
 
-[License](#license)
+| Component | Type      | Description | Keywords | Version | License | Repository |
+|-----------|-----------|-------------|----------|---------|---------|------------|
+| MySQL     | Database  | Cloud-native, sharding support | sharding | 8.0 | GPL | [Download](https://www.mysql.com/downloads) |
+| Node.js   | Runtime   | JavaScript runtime | code, javascript | alpine | MIT | [GitHub](https://github.com/nodejs/node) |
+| GraphQL   | API       | Aggregates data from multiple sources for a single query | query, polling, websocket | 4.11.2 | MIT | [GitHub](https://github.com/apollographql/apollo-server) |
 
-### 1\. Installation
+---
 
-Install kubernetes minikube (Linux x86 .deb)
+## Roadmap
 
-https://minikube.sigs.k8s.io/docs/
+- ✅ User UI  
+- ✅ Seller UI  
+- ✅ Backend  
+- ✅ Multi-wallet support (Lace)  
+- ⏳ Full Midnight DUST implementation  
 
-```
+---
+
+## Installation Guide
+
+### 1. Kubernetes Minikube (Linux x86 .deb)
+
+[Minikube Documentation](https://minikube.sigs.k8s.io/docs/)
+
+```bash
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
 sudo dpkg -i minikube_latest_amd64.deb
 ```
 
-```
-minikube start --driver=docker --cpus="6" --memory=14gb --disk-size=200g 
+```bash
+minikube start --driver=docker --cpus="6" --memory=14gb --disk-size=200g
 ```
 
-```
+```bash
 minikube addons enable ingress
 minikube addons enable dashboard
 minikube addons enable metrics-server
 ```
 
-Clone this repository in the work directory
+### 2. Clone the Repository
 
-```
+```bash
 git clone https://github.com/Midso-dao/midso.git
 ```
 
-Install kubectl
+### 3. Install kubectl
 
-```
-https://kubernetes.io/docs/tasks/tools/install-kubectl-linux
-```
+[Kubectl Installation Guide](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux)
 
-Install skafold dev
-[https://skaffold.dev/docs/install/](https://skaffold.dev/docs/install/)
+### 4. Install Skaffold
 
-```
+[Skaffold Documentation](https://skaffold.dev/docs/install/)
+
+```bash
 ./skaffold.sh
 ```
 
-### 2\. License
+---
 
-This project is licensed under the terms of the [Apache License 2.0](./LICENSE).
+## License
 
-Copyright © 2025  
-**Midso - Juan José Caballero Rey - Cardano Pioneer 1st Cohort**
+Licensed under the [Apache License 2.0](./LICENSE).  
+© 2025 — **Midso** by Juan José Caballero Rey — *Cardano Pioneer, 1st Cohort*
 
 ---
 
-### Contact
+## Contact
 
-- **GitHub:** [rey-sudo](https://github.com/rey-sudo)
+- **GitHub:** [rey-sudo](https://github.com/rey-sudo)  
 - **Email:** [midso.dao@gmail.com](mailto:midso.dao@gmail.com)  
-- **Discord:** [Join our server](https://discord.com/invite/MJ5Ckac6TV)  
+- **Discord:** [Join server](https://discord.com/invite/MJ5Ckac6TV)  
 - **X (Twitter):** [@midsodao](https://x.com/midsodao)  
-- **LinkedIn:** [Rey Sudo](https://www.linkedin.com/in/rey-sudo)
+- **LinkedIn:** [Rey Sudo](https://www.linkedin.com/in/rey-sudo)  
 
 ---
 
-### Get Involved
+## Get Involved
 
 - [Become a Seller](https://seller.midso.io)  
 - [Become a Mediator](https://discord.com/invite/MJ5Ckac6TV)  
-- [Become an Administrative](https://discord.com/invite/MJ5Ckac6TV)  
-- [Become a Developer](https://discord.com/invite/MJ5Ckac6TV)  
-- [Become a Mod](https://discord.com/invite/MJ5Ckac6TV)
+- [Join the Admin Team](https://discord.com/invite/MJ5Ckac6TV)  
+- [Contribute as Developer](https://discord.com/invite/MJ5Ckac6TV)  
+- [Moderate the Community](https://discord.com/invite/MJ5Ckac6TV)  
 
 ---
 
-🚀 Call for Contributors: Catalyst Fund 14 🚀
-
-We're looking for dedicated contributors to join us for Catalyst Fund 14.
-
-Be part of shaping the future of Cardano.
-
-
+🚀 **Call for Contributors: Catalyst Fund 14** 🚀  
+Help shape the future of decentralized e-commerce on Midnight.
